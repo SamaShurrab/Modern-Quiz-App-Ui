@@ -2,7 +2,6 @@ import 'package:modern_quiz_app_ui/classes/question.dart';
 import 'package:modern_quiz_app_ui/constatnts/strings.dart';
 
 class QuestionsModel {
-  // int currentNumQuestion = 1;
   int numberQuestion = 0;
   List<Question> questions = [
     Question(

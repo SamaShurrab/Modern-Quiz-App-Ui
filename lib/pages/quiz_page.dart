@@ -32,7 +32,6 @@ class QuizPageState extends State<QuizPage> {
   int live = 3;
   List<bool> isChecked = [];
   int userAnswerIndex = 0;
-  late int qIndex;
   Timer? timer;
   final int totalSeconds = 10;
   int timeLeft = 10;
@@ -64,7 +63,6 @@ class QuizPageState extends State<QuizPage> {
     } else {
       setState(() {
         questionsModel.nextQuestion();
-        qIndex = questionsModel.numberQuestion;
         userAnswerIndex = -1;
         resetIsCheckedList();
         timeLeft = totalSeconds;
@@ -96,7 +94,6 @@ class QuizPageState extends State<QuizPage> {
     questionsModel.getQuestionTextBySectionName(widget.sectionQuestion);
     questionsModel.getQuestionOptionsBySectionName(widget.sectionQuestion);
     questionsModel.getCorrectAnswerBySectionName(widget.sectionQuestion);
-    qIndex = questionsModel.numberQuestion;
     resetIsCheckedList();
     startTimer();
   }
@@ -199,7 +196,9 @@ class QuizPageState extends State<QuizPage> {
             SizedBox(height: 50),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: questionsModel.questionOptions[qIndex].length,
+              itemCount: questionsModel
+                  .questionOptions[questionsModel.numberQuestion]
+                  .length,
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Padding(
@@ -242,7 +241,8 @@ class QuizPageState extends State<QuizPage> {
                         Expanded(
                           flex: 12,
                           child: Text(
-                            questionsModel.questionOptions[qIndex][index],
+                            questionsModel.questionOptions[questionsModel
+                                .numberQuestion][index],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,
