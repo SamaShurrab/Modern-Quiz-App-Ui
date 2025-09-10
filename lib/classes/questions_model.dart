@@ -39,9 +39,23 @@ class QuestionsModel {
     ),
     Question(
       questionText:
+          "In Flutter, every widget is immutable after it is created.",
+      questionOptions: [false, true],
+      correctAnswer: 1,
+      questionSection: AppStrings.flutterSection,
+    ),
+    Question(
+      questionText:
           "Which widget is commonly used for creating layouts in a row?",
       questionOptions: ["Column", "Row", "Stack"],
       correctAnswer: 1,
+      questionSection: AppStrings.flutterSection,
+    ),
+    Question(
+      questionText:
+          "StatefulWidget is used when the UI does not change during the app’s lifecycle.",
+      questionOptions: [false, true],
+      correctAnswer: 0,
       questionSection: AppStrings.flutterSection,
     ),
     Question(
@@ -71,7 +85,47 @@ class QuestionsModel {
       correctAnswer: 0,
       questionSection: AppStrings.andriodSection,
     ),
+    Question(
+      questionText: "Which HTML tag is used to link an external CSS file?",
+      questionOptions: ["<link>", "<style>", "<css>"],
+      correctAnswer: 0,
+      questionSection: AppStrings.frontEndSection,
+    ),
+    Question(
+      questionText:
+          "CSS Flexbox is mainly used for creating responsive layouts.",
+      questionOptions: [false, true],
+      correctAnswer: 1,
+      questionSection: AppStrings.frontEndSection,
+    ),
+    Question(
+      questionText:
+          "In JavaScript, which keyword is used to declare a variable that can’t be reassigned?",
+      questionOptions: ["var", "let", "const", "static"],
+      correctAnswer: 2,
+      questionSection: AppStrings.frontEndSection,
+    ),
+    Question(
+      questionText: "Which CSS property controls the size of text?",
+      questionOptions: ["ont-style", "font-size", "text-size"],
+      correctAnswer: 1,
+      questionSection: AppStrings.frontEndSection,
+    ),
+    Question(
+      questionText:
+          "Which of the following is not a JavaScript framework/library?",
+      questionOptions: ["Angular", "React", "Vue", "Django"],
+      correctAnswer: 3,
+      questionSection: AppStrings.frontEndSection,
+    ),
+    Question(
+      questionText: "HTML is a programming language.",
+      questionOptions: [false, true],
+      correctAnswer: 0,
+      questionSection: AppStrings.frontEndSection,
+    ),
   ];
+
   List<String> questionSections = [
     AppStrings.flutterSection,
     AppStrings.andriodSection,
@@ -79,11 +133,11 @@ class QuestionsModel {
   ];
 
   List<String> questionText = [];
-  List<List<String>> questionOptions = [];
+  List<List<dynamic>> questionOptions = [];
   List<int> correctAnswerList = [];
   int correctAnswers = 0;
 
-  List<String> getQuestionOptions() {
+  List<dynamic> getQuestionOptions() {
     return questions[numberQuestion].questionOptions;
   }
 
@@ -119,7 +173,6 @@ class QuestionsModel {
     if (correctAnswerList[numberQuestion] == userAnswerIndex) {
       ++correctAnswers;
     }
-    
   }
 
   int getNumberQuestionBySectionName(String sectionQuestion) {

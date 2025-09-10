@@ -227,8 +227,10 @@ class QuizPageState extends State<QuizPage> {
                         Expanded(
                           flex: 12,
                           child: Text(
-                            questionsModel.questionOptions[questionsModel
-                                .numberQuestion][index],
+                            questionsModel
+                                .questionOptions[questionsModel
+                                    .numberQuestion][index]
+                                .toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,

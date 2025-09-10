@@ -1,6 +1,6 @@
 class Question {
   final String questionText;
-  final List<String> questionOptions;
+  final List<dynamic> questionOptions;
   final int correctAnswer;
   final String questionSection;
 
@@ -8,6 +8,6 @@ class Question {
     required this.questionText,
     required this.questionOptions,
     required this.correctAnswer,
-    required this.questionSection
+    required this.questionSection,
   });
 }
