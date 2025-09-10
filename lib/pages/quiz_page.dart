@@ -30,17 +30,10 @@ class QuizPage extends StatefulWidget {
 class QuizPageState extends State<QuizPage> {
   QuestionsModel questionsModel = QuestionsModel();
   int live = 3;
-  List<bool> isChecked = [];
-  int userAnswerIndex = 0;
+  int userAnswerIndex = -1;
   Timer? timer;
   final int totalSeconds = 10;
   int timeLeft = 10;
-
-  void resetIsCheckedList() {
-    int length =
-        questionsModel.questionOptions[questionsModel.numberQuestion].length;
-    isChecked = List.filled(length, false);
-  }
 
   void _goNext() {
     if (userAnswerIndex != -1) {
@@ -64,7 +57,6 @@ class QuizPageState extends State<QuizPage> {
       setState(() {
         questionsModel.nextQuestion();
         userAnswerIndex = -1;
-        resetIsCheckedList();
         timeLeft = totalSeconds;
       });
       startTimer();
@@ -94,7 +86,7 @@ class QuizPageState extends State<QuizPage> {
     questionsModel.getQuestionTextBySectionName(widget.sectionQuestion);
     questionsModel.getQuestionOptionsBySectionName(widget.sectionQuestion);
     questionsModel.getCorrectAnswerBySectionName(widget.sectionQuestion);
-    resetIsCheckedList();
+
     startTimer();
   }
 
@@ -207,21 +199,14 @@ class QuizPageState extends State<QuizPage> {
                     onPressed: () {
                       setState(() {
                         userAnswerIndex = index;
-                        for (int i = 0; i < isChecked.length; i++) {
-                          isChecked[i] = false;
-                        }
-                        isChecked[index] = true;
-                        timer?.cancel();
-                        questionsModel.getCorrectAnswerBySectionName(
-                          widget.sectionQuestion,
-                        );
+                      
                         Future.delayed(Duration(milliseconds: 500), () {
                           _goNext();
                         });
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isChecked[index]
+                      backgroundColor: userAnswerIndex == index
                           ? questionsModel.correctAnswerList[questionsModel
                                         .numberQuestion] ==
                                     userAnswerIndex
@@ -247,13 +232,13 @@ class QuizPageState extends State<QuizPage> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
-                              color: isChecked[index]
+                              color: userAnswerIndex == index
                                   ? Colors.white
                                   : widget.textColor,
                             ),
                           ),
                         ),
-                        ?isChecked[index]
+                        ?userAnswerIndex == index
                             ? questionsModel.correctAnswerList[questionsModel
                                           .numberQuestion] ==
                                       userAnswerIndex
