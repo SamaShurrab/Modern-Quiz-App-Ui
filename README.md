@@ -123,7 +123,7 @@ lib
 ### 2) Quiz Page & Quiz Page
 | Quiz Page | Quiz Page |
 | --- | --- |
-| ![Quiz Page](assets/images/quiz_page1.png) || ![Quiz Page](assets/images/quiz_page4.png) |
+| ![Quiz Page](assets/images/quiz_page1.png) | ![Quiz Page](assets/images/quiz_page4.png) |
 
 ### 3) Quiz Page Correct / Wrong Answer
 | Quiz Page in Choose Correct Answer | Quiz Page in Choose Wrong Answer |
