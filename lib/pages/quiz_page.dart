@@ -44,7 +44,7 @@ class QuizPageState extends State<QuizPage> {
       timer?.cancel();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => ResultPage(
+          builder: (context) => ResultPage(
             numberCorrectQuestion: questionsModel.correctAnswers,
             totalQuestion: questionsModel.getNumberQuestionBySectionName(
               widget.sectionQuestion,
