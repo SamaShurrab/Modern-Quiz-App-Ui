@@ -214,35 +214,29 @@ class QuizPageState extends State<QuizPage> {
                                 : Colors.red
                           : Colors.white,
                       elevation: 3,
-                      padding: EdgeInsets.all(20),
                       shadowColor: Colors.grey,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 12,
-                          child: Text(
-                            questionsModel
-                                .questionOptions[questionsModel
-                                    .numberQuestion][index]
-                                .toString(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: userAnswerIndex == index
-                                  ? Colors.white
-                                  : widget.textColor,
-                            ),
-                          ),
+                    child: ListTile(
+                      title: Text(
+                        questionsModel
+                            .questionOptions[questionsModel
+                                .numberQuestion][index]
+                            .toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: userAnswerIndex == index
+                              ? Colors.white
+                              : widget.textColor,
                         ),
-                        if (userAnswerIndex == index)
-                          Expanded(
-                            child: Icon(
+                      ),
+
+                      trailing: userAnswerIndex == index
+                          ? Icon(
                               questionsModel.correctAnswerList[questionsModel
                                           .numberQuestion] ==
                                       userAnswerIndex
@@ -250,9 +244,8 @@ class QuizPageState extends State<QuizPage> {
                                   : Icons.close,
                               color: Colors.white,
                               size: 20,
-                            ),
-                          ),
-                      ],
+                            )
+                          : null,
                     ),
                   ),
                 );
