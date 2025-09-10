@@ -43,11 +43,8 @@ class QuizPageState extends State<QuizPage> {
     isChecked = List.filled(length, false);
   }
 
-  void _goNext({bool fromTimer = false}) {
-    if (!fromTimer && userAnswerIndex != -1) {
-      questionsModel.checkAneswr(userAnswerIndex);
-    }
-
+  void _goNext() {
+    questionsModel.checkAneswr(userAnswerIndex);
     if (questionsModel.isFinished()) {
       timer?.cancel();
       Navigator.of(context).pushReplacement(
@@ -85,7 +82,7 @@ class QuizPageState extends State<QuizPage> {
         });
       } else {
         t.cancel();
-        _goNext(fromTimer: true);
+        _goNext();
       }
     });
   }
