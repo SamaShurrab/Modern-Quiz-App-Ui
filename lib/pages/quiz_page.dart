@@ -44,7 +44,10 @@ class QuizPageState extends State<QuizPage> {
   }
 
   void _goNext() {
-    questionsModel.checkAneswr(userAnswerIndex);
+    if (userAnswerIndex != -1) {
+      questionsModel.checkAneswr(userAnswerIndex);
+    }
+
     if (questionsModel.isFinished()) {
       timer?.cancel();
       Navigator.of(context).pushReplacement(
