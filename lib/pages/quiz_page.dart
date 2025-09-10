@@ -185,13 +185,12 @@ class QuizPageState extends State<QuizPage> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             ListView.builder(
               shrinkWrap: true,
               itemCount: questionsModel
                   .questionOptions[questionsModel.numberQuestion]
                   .length,
-              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 15),
@@ -241,25 +240,18 @@ class QuizPageState extends State<QuizPage> {
                             ),
                           ),
                         ),
-                        ?userAnswerIndex == index
-                            ? questionsModel.correctAnswerList[questionsModel
+                        if (userAnswerIndex == index)
+                          Expanded(
+                            child: Icon(
+                              questionsModel.correctAnswerList[questionsModel
                                           .numberQuestion] ==
                                       userAnswerIndex
-                                  ? Expanded(
-                                      child: Icon(
-                                        Icons.check_sharp,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    )
-                                  : Expanded(
-                                      child: Icon(
-                                        Icons.close,
-                                        color: Colors.white,
-                                        size: 20,
-                                      ),
-                                    )
-                            : null,
+                                  ? Icons.check_sharp
+                                  : Icons.close,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
                       ],
                     ),
                   ),
