@@ -199,7 +199,6 @@ class QuizPageState extends State<QuizPage> {
                     onPressed: () {
                       setState(() {
                         userAnswerIndex = index;
-                      
                         Future.delayed(Duration(milliseconds: 500), () {
                           _goNext();
                         });
