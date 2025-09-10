@@ -1,5 +1,5 @@
 {
-    "name": "modern_quiz_app_ui",
+    "name": "Quiz App",
     "short_name": "modern_quiz_app_ui",
     "start_url": ".",
     "display": "standalone",
