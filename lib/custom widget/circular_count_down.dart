@@ -24,6 +24,7 @@ class CircularCountDown extends StatelessWidget {
               child: CircularProgressIndicator(
                 value: progress,
                 strokeWidth: 4,
+                backgroundColor: Colors.white38,
                 valueColor: const AlwaysStoppedAnimation(Colors.white),
               ),
             ),
