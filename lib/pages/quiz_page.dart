@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_quiz_app_ui/classes/questions_model.dart';
 import 'package:modern_quiz_app_ui/constatnts/colors.dart';
+import 'package:modern_quiz_app_ui/constatnts/paths.dart';
 import 'package:modern_quiz_app_ui/constatnts/strings.dart';
 import 'package:modern_quiz_app_ui/custom%20widget/circular_count_down.dart';
 import 'package:modern_quiz_app_ui/pages/result_page.dart';
@@ -34,6 +36,7 @@ class QuizPageState extends State<QuizPage> {
   Timer? timer;
   final int totalSeconds = 10;
   int timeLeft = 10;
+  late AudioPlayer player;
 
   void _goNext() {
     if (userAnswerIndex != -1) {
@@ -42,6 +45,7 @@ class QuizPageState extends State<QuizPage> {
 
     if (questionsModel.isFinished()) {
       timer?.cancel();
+      player.stop();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => ResultPage(
@@ -69,31 +73,39 @@ class QuizPageState extends State<QuizPage> {
     });
     timer = Timer.periodic(Duration(seconds: 1), (t) {
       if (timeLeft > 0) {
+        playTick();
         setState(() {
           timeLeft--;
         });
       } else {
         t.cancel();
+        player.stop();
         _goNext();
       }
     });
   }
 
+  Future<void> playTick() async {
+    await player.stop();
+    await player.play(AssetSource(AppPaths.tickSound), volume: 1.0);
+  }
+
   @override
   void initState() {
     super.initState();
-
+    player = AudioPlayer();
+    player.setReleaseMode(ReleaseMode.stop);
     questionsModel.getQuestionTextBySectionName(widget.sectionQuestion);
     questionsModel.getQuestionOptionsBySectionName(widget.sectionQuestion);
     questionsModel.getCorrectAnswerBySectionName(widget.sectionQuestion);
-
     startTimer();
   }
 
   @override
   void dispose() {
-    super.dispose();
     timer?.cancel();
+    player.dispose();
+    super.dispose();
   }
 
   @override
@@ -113,6 +125,7 @@ class QuizPageState extends State<QuizPage> {
           padding: const EdgeInsets.only(left: 20),
           child: OutlinedButton.icon(
             onPressed: () {
+              player.stop();
               Navigator.of(context).pop();
             },
             style: OutlinedButton.styleFrom(
