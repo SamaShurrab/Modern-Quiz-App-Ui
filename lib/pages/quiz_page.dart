@@ -82,6 +82,7 @@ class QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     super.initState();
+
     questionsModel.getQuestionTextBySectionName(widget.sectionQuestion);
     questionsModel.getQuestionOptionsBySectionName(widget.sectionQuestion);
     questionsModel.getCorrectAnswerBySectionName(widget.sectionQuestion);
@@ -195,14 +196,16 @@ class QuizPageState extends State<QuizPage> {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 15),
                   child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        userAnswerIndex = index;
-                        Future.delayed(Duration(milliseconds: 500), () {
-                          _goNext();
-                        });
-                      });
-                    },
+                    onPressed: userAnswerIndex == -1 || userAnswerIndex == index
+                        ? () {
+                            setState(() {
+                              userAnswerIndex = index;
+                              Future.delayed(Duration(seconds: 1), () {
+                                _goNext();
+                              });
+                            });
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: userAnswerIndex == index
                           ? questionsModel.correctAnswerList[questionsModel
