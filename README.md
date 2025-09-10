@@ -114,6 +114,9 @@ lib
 
 ## Screenshots 📸
 
+### Quiz App Icon
+| ![Quiz App Icon](assets/images/appIcon.png)
+
 ### 1) Home Page & Quiz Page
 | Home Page | Quiz Page |
 | --- | --- |
