@@ -114,20 +114,23 @@ lib
 
 ## Screenshots 📸
 
-### Quiz App Icon
-![Quiz App Icon](assets/images/appIcon.png)
 
-### 1) Home Page & Quiz Page
-| Home Page | Quiz Page |
+### 1) Quiz App Icon & Home Page
+|  Quiz App Icon | Home Page |
 | --- | --- |
-| ![Home Page](assets/images/home_page.png) | ![Quiz Page](assets/images/quiz_page1.png) || ![Quiz Page](assets/images/quiz_page4.png) |
+| ![Quiz App Icon](assets/images/appIcon.png) | ![Home Page](assets/images/home_page.png) |
 
-### 2) Quiz Page Correct / Wrong Answer
+### 2) Quiz Page & Quiz Page
+| Quiz Page | Quiz Page |
+| --- | --- |
+| ![Quiz Page](assets/images/quiz_page1.png) || ![Quiz Page](assets/images/quiz_page4.png) |
+
+### 3) Quiz Page Correct / Wrong Answer
 | Quiz Page in Choose Correct Answer | Quiz Page in Choose Wrong Answer |
 | --- | --- |
 | ![Quiz Page in Choose Correct Answer](assets/images/quiz_page2.png) | ![Quiz Page in Choose Wrong Answer](assets/images/quiz_page3.png) |
 
-### 3) Result Page
+### 4) Result Page
 | Result Page in Concongratulations | Result Page in Failed |
 | --- | --- |
 | ![Result Page in Concongratulations](assets/images/result_page1.png) | ![Result Page in Failed](assets/images/result_page2.png) |
