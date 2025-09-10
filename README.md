@@ -1,5 +1,12 @@
 # Modern Quiz App UI 🎓🚀
 
+![Flutter](https://img.shields.io/badge/Flutter-3.24-blue?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.5-blue?logo=dart)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey)
+
+---
+
 ## Project Introduction 🎯
 A modern quiz application built with **Flutter** and **Dart**.  
 It includes interactive quiz pages, result screens, and a clean modern UI.  
@@ -43,7 +50,7 @@ The project is structured with reusable widgets, organized logic, and assets for
 
 ## Key Features 🛠️
 - Multiple Quiz Pages with dynamic data  
-- Countdown timer per quiz  
+- **Countdown Timer** for quizzes ⏱️  
 - Organized results pages  
 - Custom UI widgets (countdown, card)  
 - Well-structured assets and constants management  
@@ -51,24 +58,31 @@ The project is structured with reusable widgets, organized logic, and assets for
 
 ---
 
-## Screenshots 📸
+## Code Snippets 📜
 
-### 1) Home Page & Quiz Page
-| Home Page | Quiz Page |
-| --- | --- |
-| ![Home Page](assets/images/home_page.png) | ![Quiz Page](assets/images/quiz_page1.png) |
+### Countdown Timer Example ⏱️
+```dart
+import 'dart:async';
 
-### 2)  Quiz Pages in Choose Correct Or Worong Answer
-| Quiz Page in Choose Correct Answer | Quiz Page in Choose Wrong Answer |
-| --- | --- |
-| ![Quiz Page in Choose Correct Answer](assets/images/quiz_page2.png) | ![Quiz Page in Choose Wrong Answer](assets/images/quiz_page3.png) |
+int start = 10; // seconds
+late Timer timer;
 
-### 3) Result Page
-| Result Page in Concongratulations | Result Page in Failed |
-| --- | --- |
-| ![Result Page in Concongratulations](assets/images/result_page1.png) | ![Result Page in Failed](assets/images/result_page2.png) |
+void startTimer() {
+  timer = Timer.periodic(Duration(seconds: 1), (t) {
+    if (start > 0) {
+      start--;
+      print("Time left: $start");
+    } else {
+      t.cancel();
+      // Navigate after delay
+      Future.delayed(Duration(seconds: 1), () {
+        print("Time's up! Navigating to result page...");
+      });
+    }
+  });
+}
 
----
+```
 
 ## Project Structure 📂 
 The project follows a clean, organized directory structure:
@@ -95,3 +109,33 @@ lib
 │  └─ section_description_page.dart # Section descriptions
 │
 └─ main.dart                     # App entry point
+
+```
+
+## Screenshots 📸
+
+### 1) Home Page & Quiz Page
+| Home Page | Quiz Page |
+| --- | --- |
+| ![Home Page](assets/images/home_page.png) | ![Quiz Page](assets/images/quiz_page1.png) |
+
+### 2) Quiz Page Correct / Wrong Answer
+| Quiz Page in Choose Correct Answer | Quiz Page in Choose Wrong Answer |
+| --- | --- |
+| ![Quiz Page in Choose Correct Answer](assets/images/quiz_page2.png) | ![Quiz Page in Choose Wrong Answer](assets/images/quiz_page3.png) |
+
+### 3) Result Page
+| Result Page in Concongratulations | Result Page in Failed |
+| --- | --- |
+| ![Result Page in Concongratulations](assets/images/result_page1.png) | ![Result Page in Failed](assets/images/result_page2.png) |
+
+---
+
+## Acknowledgements 🙌
+- [Flutter Documentation](https://docs.flutter.dev/)  
+- [Dart Language](https://dart.dev/)  
+
+---
+
+
+

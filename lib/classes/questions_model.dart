@@ -120,6 +120,7 @@ class QuestionsModel {
     if (correctAnswerList[numberQuestion] == userAnswerIndex) {
       ++correctAnswers;
     }
+    
   }
 
   int getNumberQuestionBySectionName(String sectionQuestion) {
