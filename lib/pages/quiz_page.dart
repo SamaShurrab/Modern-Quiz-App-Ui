@@ -61,18 +61,16 @@ class QuizPageState extends State<QuizPage> {
           ),
         ),
       );
-      return;
+    } else {
+      setState(() {
+        questionsModel.nextQuestion();
+        qIndex = questionsModel.numberQuestion;
+        userAnswerIndex = -1;
+        resetIsCheckedList();
+        timeLeft = totalSeconds;
+      });
+      startTimer();
     }
-
-    setState(() {
-      questionsModel.nextQuestion();
-      qIndex = questionsModel.numberQuestion;
-      userAnswerIndex = -1;
-      resetIsCheckedList();
-      timeLeft = totalSeconds;
-    });
-
-    startTimer();
   }
 
   void startTimer() {
