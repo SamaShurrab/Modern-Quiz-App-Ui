@@ -57,7 +57,6 @@ class QuizPageState extends State<QuizPage> {
       setState(() {
         questionsModel.nextQuestion();
         userAnswerIndex = -1;
-        timeLeft = totalSeconds;
       });
       startTimer();
     }
