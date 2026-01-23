@@ -7,7 +7,7 @@
 
 ---
 
-## Project Introduction 🎯
+## 🎯 Project Introduction 
 A modern quiz application built with **Flutter** and **Dart**.  
 It includes interactive quiz pages, result screens, and a clean modern UI.  
 The project is structured with reusable widgets, organized logic, and assets for a professional design.
@@ -17,6 +17,7 @@ The project is structured with reusable widgets, organized logic, and assets for
 ## Technologies Used 💻
 - **Language**: Dart  
 - **Framework**: Flutter  
+- **Packages**: flutter launcher icon 
 
 ---
 
@@ -112,28 +113,25 @@ lib
 
 ```
 
-## Screenshots 📸
+---
 
+## 🎥 Application Demo
 
-### 1) Quiz App Icon & Home Page
-|  Quiz App Icon | Home Page |
-| --- | --- |
-| ![Quiz App Icon](assets/images/appIcon.png) | ![Home Page](assets/images/home_page.png) |
+🎬 ()
 
-### 2) Quiz Page & Quiz Page
-| Quiz Page | Quiz Page |
-| --- | --- |
-| ![Quiz Page](assets/images/quiz_page1.png) | ![Quiz Page](assets/images/quiz_page4.png) |
+---
 
-### 3) Quiz Page Correct / Wrong Answer
-| Quiz Page in Choose Correct Answer | Quiz Page in Choose Wrong Answer |
-| --- | --- |
-| ![Quiz Page in Choose Correct Answer](assets/images/quiz_page2.png) | ![Quiz Page in Choose Wrong Answer](assets/images/quiz_page3.png) |
+## AppScreens 📸
 
-### 4) Result Page
-| Result Page in Concongratulations | Result Page in Failed |
-| --- | --- |
-| ![Result Page in Concongratulations](assets/images/result_page1.png) | ![Result Page in Failed](assets/images/result_page2.png) |
+  ![Project Images](assets/images/screens.png) 
+
+---
+
+## 📦 APK Download
+
+Download the latest version of **Modern Quiz UI** from GitHub Releases:
+
+👉 [Download Latest APK](https://github.com/SamaShurrab/Modern-Quiz-App-Ui/releases/latest)
 
 ---
 

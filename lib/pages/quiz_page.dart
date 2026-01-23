@@ -155,6 +155,8 @@ class QuizPageState extends State<QuizPage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
+                    
+                    
                   ),
                 ),
               ],

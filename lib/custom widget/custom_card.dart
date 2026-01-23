@@ -25,10 +25,13 @@ class CustomCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 10)],
         borderRadius: BorderRadius.circular(20),
+      
         gradient: LinearGradient(
           colors: gradientColor,
           begin: Alignment.centerLeft,
+        
         ),
+        
       ),
       child: InkWell(
         splashColor: Colors.transparent,
