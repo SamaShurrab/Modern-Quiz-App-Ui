@@ -117,7 +117,7 @@ lib
 
 ## 🎥 Application Demo
 
-🎬 ()
+🎬 (https://youtube.com/shorts/BL0FMfuPZ8E)
 
 ---
 
