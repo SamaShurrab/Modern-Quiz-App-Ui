@@ -76,6 +76,7 @@ class ResultPage extends StatelessWidget {
               numberCorrectQuestion >= 3
                   ? AppStrings.congratulationsMessage
                   : AppStrings.failedMessage,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,

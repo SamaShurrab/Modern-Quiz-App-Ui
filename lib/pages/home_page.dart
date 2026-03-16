@@ -29,39 +29,48 @@ class HomePage extends StatelessWidget {
       AppPaths.andriodImagePath,
       AppPaths.frontImagePath,
     ];
+    List<String> sectionDescription = [
+      AppStrings.flutterSectionDes,
+      AppStrings.andriodSectionDes,
+      AppStrings.frontEndSectionDes,
+    ];
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        actionsPadding: EdgeInsets.only(right: 10),
-        actions: [
-          OutlinedButton.icon(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              shape: CircleBorder(side: BorderSide.none),
-              padding: EdgeInsets.all(0),
-            ),
-            label: Icon(Icons.favorite, color: AppColors.primaryColor),
-          ),
-          OutlinedButton.icon(
-            style: OutlinedButton.styleFrom(
-              shape: CircleBorder(side: BorderSide.none),
-              padding: EdgeInsets.all(0),
-            ),
-            onPressed: () {},
-            label: Icon(Icons.person, color: AppColors.primaryColor),
-          ),
-        ],
-      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      shape: CircleBorder(side: BorderSide.none),
+                      padding: EdgeInsets.all(0),
+                    ),
+                    label: Icon(
+                      Icons.favorite,
+                      color: AppColors.primaryColor,
+                      size: 22,
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      shape: CircleBorder(side: BorderSide.none),
+                      padding: EdgeInsets.all(0),
+                    ),
+                    onPressed: () {},
+                    label: Icon(
+                      Icons.person,
+                      color: AppColors.primaryColor,
+                      size: 22,
+                    ),
+                  ),
+                ],
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -102,7 +111,7 @@ class HomePage extends StatelessWidget {
                                   backGround: gradientColor[index],
                                   level: "${AppStrings.level}  ${index + 1}",
                                   imageSectionPath: imagePathList[index],
-
+                                  sectionDescription: sectionDescription[index],
                                   sectionQuestion:
                                       questionsModel.questionSections[index],
                                 );

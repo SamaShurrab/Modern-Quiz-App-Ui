@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Modern Quiz App',
       theme: ThemeData(fontFamily: "Poppins"),
       debugShowCheckedModeBanner: false,
       home: HomePage(),

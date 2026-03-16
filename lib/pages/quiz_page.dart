@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_quiz_app_ui/classes/questions_model.dart';
 import 'package:modern_quiz_app_ui/constatnts/colors.dart';
-import 'package:modern_quiz_app_ui/constatnts/paths.dart';
 import 'package:modern_quiz_app_ui/constatnts/strings.dart';
 import 'package:modern_quiz_app_ui/custom%20widget/circular_count_down.dart';
 import 'package:modern_quiz_app_ui/pages/result_page.dart';
@@ -36,7 +34,6 @@ class QuizPageState extends State<QuizPage> {
   Timer? timer;
   final int totalSeconds = 10;
   int timeLeft = 10;
-  late AudioPlayer player;
 
   void _goNext() {
     if (userAnswerIndex != -1) {
@@ -45,7 +42,6 @@ class QuizPageState extends State<QuizPage> {
 
     if (questionsModel.isFinished()) {
       timer?.cancel();
-      player.stop();
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => ResultPage(
@@ -73,28 +69,20 @@ class QuizPageState extends State<QuizPage> {
     });
     timer = Timer.periodic(Duration(seconds: 1), (t) {
       if (timeLeft > 0) {
-        playTick();
         setState(() {
           timeLeft--;
         });
       } else {
         t.cancel();
-        player.stop();
         _goNext();
       }
     });
   }
 
-  Future<void> playTick() async {
-    await player.stop();
-    await player.play(AssetSource(AppPaths.tickSound), volume: 1.0);
-  }
 
   @override
   void initState() {
     super.initState();
-    player = AudioPlayer();
-    player.setReleaseMode(ReleaseMode.stop);
     questionsModel.getQuestionTextBySectionName(widget.sectionQuestion);
     questionsModel.getQuestionOptionsBySectionName(widget.sectionQuestion);
     questionsModel.getCorrectAnswerBySectionName(widget.sectionQuestion);
@@ -104,7 +92,6 @@ class QuizPageState extends State<QuizPage> {
   @override
   void dispose() {
     timer?.cancel();
-    player.dispose();
     super.dispose();
   }
 
@@ -112,6 +99,7 @@ class QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         centerTitle: true,
         elevation: 0,
         title: CircularCountDown(
@@ -125,7 +113,6 @@ class QuizPageState extends State<QuizPage> {
           padding: const EdgeInsets.only(left: 20),
           child: OutlinedButton.icon(
             onPressed: () {
-              player.stop();
               Navigator.of(context).pop();
             },
             style: OutlinedButton.styleFrom(
@@ -155,8 +142,6 @@ class QuizPageState extends State<QuizPage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    
-                    
                   ),
                 ),
               ],
@@ -164,109 +149,119 @@ class QuizPageState extends State<QuizPage> {
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: widget.backGround,
-            begin: Alignment.bottomCenter,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height - kToolbarHeight,
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                widget.imageSectionPath,
-                width: 200,
-                height: 200,
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: widget.backGround,
+                begin: Alignment.bottomCenter,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              "${AppStrings.question} ${questionsModel.numberQuestion + 1} ${AppStrings.of} ${questionsModel.getNumberQuestionBySectionName(widget.sectionQuestion)} ",
-              style: TextStyle(
-                color: Colors.white60,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              questionsModel.questionText[questionsModel.numberQuestion],
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(height: 30),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: questionsModel
-                  .questionOptions[questionsModel.numberQuestion]
-                  .length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: ElevatedButton(
-                    onPressed: userAnswerIndex == -1 || userAnswerIndex == index
-                        ? () {
-                            setState(() {
-                              userAnswerIndex = index;
-                              Future.delayed(Duration(seconds: 1), () {
-                                _goNext();
-                              });
-                            });
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: userAnswerIndex == index
-                          ? questionsModel.correctAnswerList[questionsModel
-                                        .numberQuestion] ==
-                                    userAnswerIndex
-                                ? AppColors.buttonColorDark
-                                : Colors.red
-                          : Colors.white,
-                      elevation: 3,
-                      shadowColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: ListTile(
-                      title: Text(
-                        questionsModel
-                            .questionOptions[questionsModel
-                                .numberQuestion][index]
-                            .toString(),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: userAnswerIndex == index
-                              ? Colors.white
-                              : widget.textColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    widget.imageSectionPath,
+                    width: 200,
+                    height: 200,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "${AppStrings.question} ${questionsModel.numberQuestion + 1} ${AppStrings.of} ${questionsModel.getNumberQuestionBySectionName(widget.sectionQuestion)} ",
+                  style: TextStyle(
+                    color: Colors.white60,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  questionsModel.questionText[questionsModel.numberQuestion],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(height: 30),
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: questionsModel
+                      .questionOptions[questionsModel.numberQuestion]
+                      .length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: ElevatedButton(
+                        onPressed:
+                            userAnswerIndex == -1 || userAnswerIndex == index
+                            ? () {
+                                setState(() {
+                                  userAnswerIndex = index;
+                                  Future.delayed(Duration(seconds: 1), () {
+                                    _goNext();
+                                  });
+                                });
+                              }
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: userAnswerIndex == index
+                              ? questionsModel.correctAnswerList[questionsModel
+                                            .numberQuestion] ==
+                                        userAnswerIndex
+                                    ? AppColors.buttonColorDark
+                                    : Colors.red
+                              : Colors.white,
+                          elevation: 3,
+                          shadowColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            questionsModel
+                                .questionOptions[questionsModel
+                                    .numberQuestion][index]
+                                .toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: userAnswerIndex == index
+                                  ? Colors.white
+                                  : widget.textColor,
+                            ),
+                          ),
+
+                          trailing: userAnswerIndex == index
+                              ? Icon(
+                                  questionsModel
+                                              .correctAnswerList[questionsModel
+                                              .numberQuestion] ==
+                                          userAnswerIndex
+                                      ? Icons.check_sharp
+                                      : Icons.close,
+                                  color: Colors.white,
+                                  size: 20,
+                                )
+                              : null,
                         ),
                       ),
-
-                      trailing: userAnswerIndex == index
-                          ? Icon(
-                              questionsModel.correctAnswerList[questionsModel
-                                          .numberQuestion] ==
-                                      userAnswerIndex
-                                  ? Icons.check_sharp
-                                  : Icons.close,
-                              color: Colors.white,
-                              size: 20,
-                            )
-                          : null,
-                    ),
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
